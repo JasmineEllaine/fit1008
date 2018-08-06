@@ -1,10 +1,10 @@
 .data
-	arrayPrompt:		.asciiz	"\nEnter list size: "
+	arrayPrompt:	.asciiz	"\nEnter list size: "
 	arraySize: 		.word	0
 	array: 			.word	0
 	
 	index:			.word	0
-	elemPrompt: 		.asciiz "\nEnter element "
+	elemPrompt: 		.asciiz "Enter element "
 	colon: 			.asciiz ": "
 	currElem:  		.word	0
 	
@@ -14,8 +14,8 @@
 	rangePrint:		.asciiz	"The range of this list (max - min) is: "
 	
 .text
-    	li      $v0, 4        			# prints prompt
-    	la      $t0, arrayPrompt 
+    	li      $v0, 4	 			# prints prompt
+    	la      $a0, arrayPrompt 
     	syscall
 
     	li 	    $v0, 5         		# gets input for size of array
@@ -29,15 +29,15 @@
 	
 	# $a0 must hold size of memory to allocate
 	move 	$a0, $t0			# move $s0 into $a0
-	li	 	$v0, 9 			# allocate memory syscall
+	li	$v0, 9 				# allocate memory syscall
 	syscall
 
 	# initiate array
-	sw		$v0, array		# store in array the address of first byte allocated
+	sw	$v0, array			# store in array the address of first byte allocated
 
 	Loop:
 		lw 	$s0, index 		# $s0 = index
-		addi 	$s1, $0, 5 		# $s1 = arraySize
+		lw 	$s1, arraySize 		# $s1 = arraySize
 		bge 	$s0, $s1, endLoop	# if index >= arraySize goto endloop
 
 		# compute the address to store word
