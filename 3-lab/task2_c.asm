@@ -1,5 +1,5 @@
 .data
-	arrayPrompt:	.asciiz	"\nEnter list size: "
+	arrayPrompt:		.asciiz	"\nEnter list size: "
 	arraySize: 		.word	0
 	array: 			.word	0
 	
@@ -82,6 +82,8 @@
 
 	endLoop:
 		# calculating range of array
+		lw	$s5, currMin
+		lw 	$s4, currMax
 		sub	$s6, $s4, $s5		# max - min
 		sw	$s6, range		# store range
 
