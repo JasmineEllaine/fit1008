@@ -1,5 +1,5 @@
 .data
-	arrayPrompt:		.asciiz	"\nEnter list size: "
+	arrayPrompt:	.asciiz	"\nEnter list size: "
 	arraySize: 		.word	0
 	array: 			.word	0
 	
