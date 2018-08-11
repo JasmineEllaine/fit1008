@@ -1,40 +1,39 @@
-# check how many unique frequencies
+# Task 4a
+#     Prints the frequency of each temperature in the list once
 
-sample = [26, 18, 22, 20, 13, 22, 19, 22, 20, 27, 18, 24, 15, 28, 26, 27, 20, 21, 23, 24, 27, 26, 15,
-23, 22, 20, 23, 17, 18, 18]
+# get input for array
+arraySize = int(input("Enter list size: "))
+array = [0]*arraySize
+index = 0
 
-# check each number in list to see if it is not in unique
-unique = []
+# build array while getting the max value at the same time
+while index < arraySize:
+    msg = "Enter element " + str(index) + ": "
+    array[index] = int(input(msg))
 
-# gets list of all numbers that are unique
-indexSample = 0
-while indexSample < len(sample):
-    if sample[indexSample] not in unique:
-        unique.append(sample[indexSample])
-    indexSample += 1
+    # getting max value of array
+    if index == 0:
+        currMax = array[0]
+    else:
+        if array[index] > currMax:
+            currMax = array[index]
+    index += 1
 
-# counts occurencse of each item in unique
-bitList = [0]*len(unique)
-indexUnique = 0
-indexSample = 0
-while indexUnique < len(unique):
-    while indexSample < len(sample):
-        if unique[indexUnique] == sample[indexSample]:
-            bitList[indexUnique] += 1
-        indexSample += 1
-    indexUnique += 1
-    indexSample = 0
+# make bitlist with length (max + 1)
+# temperature itself will be used as index since precondition
+#     states that only natural numbers can be inputted
+bitList = [0]*(currMax + 1)
 
-print(unique)
-print(bitList)
+# counts occurences of each item and stores data in bitList
+index = 0 
+while (index < len(array)):
+    temperature = array[index]
+    bitList[temperature] += 1
+    index += 1
 
-
-
-
-# gets list of all numbers that are unique
-indexSample = 0
-indexUnique = 0
-while indexSample < len(sample):
-    if sample[indexSample] not in unique:
-        unique.append(sample[indexSample])
-    indexSample += 1 
+# prints temperature frequency neatly
+index = 0
+while (index < len(bitList)):
+    if bitList[index] != 0:
+        print(index, "appears", bitList[index], "time(s)")
+    index += 1
