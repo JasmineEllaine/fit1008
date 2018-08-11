@@ -1,3 +1,6 @@
+# Task 2c
+#     Faithful translation of task 2b
+
 .data
 	arrayPrompt:	.asciiz	"\nEnter list size: "
 	arraySize: 		.word	0

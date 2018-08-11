@@ -1,5 +1,5 @@
-# Task 1b
-#     Faithful translation of task 1 b
+# Task 1c
+#     Faithful translation of task 1b
 
 .data
     prompt:     .asciiz "Enter a year: "
