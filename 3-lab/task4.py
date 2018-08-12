@@ -1,5 +1,5 @@
 # Task 4a
-#     Prints the frequency of each temperature in the list once
+#     Prints the frequency of each temperature in the list
 
 # get input for array
 arraySize = int(input("Enter list size: "))
