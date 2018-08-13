@@ -38,8 +38,16 @@
         syscall
 
     isLeapYear:
-    # stores return values in v1
-    #   0 = false, 1 = true
+    # Checks if a given year is a leap year
+    # Args:
+    #     $a0 (int): year
+    # Returns:
+    #     $v1: 0 - if leap year
+    #          1 - if not leap year
+    # Precondition:
+    #     No preconditons
+    # Complexity:
+    #     O(1)
         li      $t0, 100        # div by 100
         div     $a0, $t0
         mfhi    $t1             # t1 = remainder
