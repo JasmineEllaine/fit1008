@@ -114,65 +114,103 @@ class ArrayBasedList:
                 while j >=0 and key < self.array[j] :
                         self.array[j+1] = self.array[j]
                         j -= 1
-                self.array[j+1] = key         
+                self.array[j+1] = key
 
-testObject = ArrayBasedList(5)
-testObject.array[0] = "hi"
-testObject.array[1] = 1
-testObject.array[2] = True
-# print(len(testObject))
-# print(str(testObject))
-# print(len(testObject))
-# print("hi" in testObject)
+def arrayTestFunc():
+    # function to test if array is working
+    # make two lists
 
-# get item test case
-# print(testObject[0])
-# print(testObject[-1])
-# print(testObject[2])
-# print(testObject[-3])
-# print(testObject[3])
+    testObject = ArrayBasedList(5)
+    testObject.array[0] = "hi"
+    testObject.array[1] = 1
+    testObject.array[2] = True
 
-# set item test case
-# print(testObject.array[1])
-# testObject[1] = "hi"
-# print(testObject.array[1])
+    otherObject = ArrayBasedList(5)
+    otherObject.array[0] = 2
+    otherObject.array[1] = 1
+    otherObject.array[2] = 5
+    otherObject.array[3] = 3
+    otherObject.array[4] = 4
 
-# eq test case
-# otherObject = ArrayBasedList(3)
-# otherObject.array[0] = "hi"
-# otherObject.array[1] = 1
-# otherObject.array[2] = False
-# print(testObject == otherObject)
+    # test str method
+    print(str(testObject), "\n")
+    print(str(otherObject), "\n")
 
-# testObject.append("cat")
-# testObject.append(2)
-# print(str(testObject))
-# testObject.append(False)
+    # len method
+    print(len(testObject))
+    print(len(otherObject), "\n")
 
-# testObject.insert(1, False)
-# print(str(testObject) + "\n")
-# # testObject.insert(0, "hello")
-# testObject.insert(-4, "hello")
-# print(str(testObject))
+    # in method
+    print("hi" in testObject)
+    print("hello" in testObject, "\n")
 
-# testObject.remove("hi")
-# print(str(testObject) + "\n")
-# testObject.remove(True)
-# print(str(testObject))
-# testObject.remove("hi")
+    # get item method
+    print(testObject[0])
+    print(testObject[-1])
+    print(testObject[2])
+    try:
+        print(testObject[-3])
+    except:
+        print("Index out of range")
 
-# print(str(testObject) + "\n")
-# testObject.delete(2)
-# print(str(testObject))
+    try:
+        print(testObject[3])
+    except:
+        print("Index out of range", "\n")
 
-otherObject = ArrayBasedList(5)
-otherObject.array[0] = 2
-otherObject.array[1] = 5
-otherObject.array[2] = 1
-otherObject.array[3] = 4
-otherObject.array[4] = 3
-otherObject.sort(False)
-print(str(otherObject) + "\n")
-otherObject.sort(True)
-print(str(otherObject))
+    # set item method
+    print(testObject.array[0])
+    testObject[0] = "hello"
+    print(testObject.array[0], "\n")
 
+    testObject[0] = "hi"
+    print(testObject.array[0], "\n")
+
+    # eq method
+    anotherObject = ArrayBasedList(3)
+    anotherObject.array[0] = "hi"
+    anotherObject.array[1] = 1
+    anotherObject.array[2] = False
+    print(testObject == otherObject)
+    print(testObject == anotherObject, "\n")
+
+    # append method
+    testObject.append("cat")
+    testObject.append(2)
+    print(str(testObject))
+    try:
+        testObject.append(False)
+    except:
+        print("Array is full", "\n")
+
+    # remove method
+    testObject.remove("cat")
+    testObject.remove(2)
+    print(str(testObject), "\n")
+    try:
+        testObject.remove("cat")
+    except:
+        print("Item not found.")
+
+    # insert method
+    # testObject.insert(1, False)
+    # print(str(testObject)) + "\n"
+    # testObject.insert(0, "hello")
+    # testObject.insert(-4, "hello")
+    # print(str(testObject))
+
+
+
+    # print(str(testObject)) + "\n"
+    # testObject.delete(2)
+    # print(str(testObject))
+
+    # otherObject.sort(False)
+    # print(str(otherObject)) + "\n"
+    # otherObject.sort(True)
+    # print(str(otherObject))
+
+    # for k, v in ArrayBasedList.__dict__.items():
+    # if "function" in str(v):
+
+arrayTestFunc()
