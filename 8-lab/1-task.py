@@ -15,9 +15,11 @@ class ArrayBasedList:
 
     def __len__(self):
         i = 0
-        while (i < self.maxSize) and (self.array[i] != None):
-            i += 1
-        return i
+        try: 
+            while (i < self.maxSize) and (self.array[i] is not None):
+                i += 1
+        finally:
+            return i
     
     def __contains__(self, item):
         for elem in self.array:
@@ -63,11 +65,11 @@ class ArrayBasedList:
                 raise IndexError("Index out of range of list")
             elif index >= 0:
                 tmp1 = self.array[:index]
-                tmp2 = self.array[index:-1]
+                tmp2 = self.array[index:]
                 self.array = tmp1 + [item] + tmp2
             elif index < 0:
-                tmp1 = self.array[:abs(index)-1]
-                tmp2 = self.array[abs(index)-1:-1]
+                tmp1 = self.array[:len(self)+index]
+                tmp2 = self.array[len(self)+index:]
                 self.array = tmp1 + [item] + tmp2
         else:
             raise IndexError("List is full")
@@ -188,29 +190,32 @@ def arrayTestFunc():
     # remove method
     testObject.remove("cat")
     testObject.remove(2)
-    print(str(testObject), "\n")
+    print(str(testObject))
     try:
         testObject.remove("cat")
     except:
-        print("Item not found.")
+        print("Item not found.", "\n")
 
     # insert method
-    # testObject.insert(1, False)
-    # print(str(testObject)) + "\n"
-    # testObject.insert(0, "hello")
-    # testObject.insert(-4, "hello")
-    # print(str(testObject))
+    testObject.insert(1, False)
+    print(str(testObject), "\n")
+    testObject.insert(-4, "hello")
+    print(str(testObject))
+    try:
+        testObject.insert(-4, "hello")
+    except:
+        print("Array full\n")
 
+    # delete
+    testObject.delete(-3)
+    print(str(testObject), "\n")
+    testObject.delete(0)
+    print(str(testObject), "\n")
 
-
-    # print(str(testObject)) + "\n"
-    # testObject.delete(2)
-    # print(str(testObject))
-
-    # otherObject.sort(False)
-    # print(str(otherObject)) + "\n"
-    # otherObject.sort(True)
-    # print(str(otherObject))
+    otherObject.sort()
+    print(str(otherObject), "\n")
+    otherObject.sort(True)
+    print(str(otherObject))
 
     # for k, v in ArrayBasedList.__dict__.items():
     # if "function" in str(v):

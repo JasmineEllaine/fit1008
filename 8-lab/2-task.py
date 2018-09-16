@@ -1,18 +1,7 @@
 from referential_array import build_array
 
 class ArrayBasedList:
-
-#     Modify your list implementation so that the size of the underlying array is dynamic. The base size of the
-# array is 20 and should never be less than 20. However, if the list becomes full, it is resized to be 2 times
-# larger than the current size. Likewise, the underlying size should decrease by half if the underlying array
-# is larger than the base size but the content occupies less than 1
-# 8
-# of the available space. When resizing the
-# list, retain the contents of the list. That is, when it is initially filled, it will be resized to 20 items, then 40,
-# while retaining the contents initially in it. The same happens when the size of the array shrinks.
-
     def __init__(self, size):
-        assert size >= 20
         self.array = build_array(size)
         self.maxSize = size
 
@@ -26,9 +15,11 @@ class ArrayBasedList:
 
     def __len__(self):
         i = 0
-        while (i < self.maxSize) and (self.array[i] != None):
-            i += 1
-        return i
+        try: 
+            while (i < self.maxSize) and (self.array[i] is not None):
+                i += 1
+        finally:
+            return i
     
     def __contains__(self, item):
         for elem in self.array:
@@ -74,12 +65,14 @@ class ArrayBasedList:
                 raise IndexError("Index out of range of list")
             elif index >= 0:
                 tmp1 = self.array[:index]
-                tmp2 = self.array[index:-1]
+                tmp2 = self.array[index:]
                 self.array = tmp1 + [item] + tmp2
             elif index < 0:
-                tmp1 = self.array[:abs(index)-1]
-                tmp2 = self.array[abs(index)-1:-1]
+                tmp1 = self.array[:len(self)+index]
+                tmp2 = self.array[len(self)+index:]
                 self.array = tmp1 + [item] + tmp2
+        else:
+            raise IndexError("List is full")
     
     def remove(self, item):
         # Deletes the first instance of item from the list. Raises a ValueError if item does
@@ -109,9 +102,15 @@ class ArrayBasedList:
             tmp2 = self.array[abs(index):]
             self.array = tmp1 + tmp2
 
-    def sort(self, reverse):
+    def sort(self, reverse=False):
         if reverse:
-            pass
+            for i in range(1, len(self.array)):
+                key = self.array[i]
+                j = i-1
+                while j >= 0 and key > self.array[j]:
+                        self.array[j+1] = self.array[j]
+                        j -= 1
+                self.array[j+1] = key        
         else:
             for i in range(1, len(self.array)):
                 key = self.array[i]
@@ -120,3 +119,105 @@ class ArrayBasedList:
                         self.array[j+1] = self.array[j]
                         j -= 1
                 self.array[j+1] = key
+
+def arrayTestFunc():
+    # function to test if array is working
+    # make two lists
+
+    testObject = ArrayBasedList(5)
+    testObject.array[0] = "hi"
+    testObject.array[1] = 1
+    testObject.array[2] = True
+
+    otherObject = ArrayBasedList(5)
+    otherObject.array[0] = 2
+    otherObject.array[1] = 1
+    otherObject.array[2] = 5
+    otherObject.array[3] = 3
+    otherObject.array[4] = 4
+
+    # test str method
+    print(str(testObject), "\n")
+    print(str(otherObject), "\n")
+
+    # len method
+    print(len(testObject))
+    print(len(otherObject), "\n")
+
+    # in method
+    print("hi" in testObject)
+    print("hello" in testObject, "\n")
+
+    # get item method
+    print(testObject[0])
+    print(testObject[-1])
+    print(testObject[2])
+    try:
+        print(testObject[-3])
+    except:
+        print("Index out of range")
+
+    try:
+        print(testObject[3])
+    except:
+        print("Index out of range", "\n")
+
+    # set item method
+    print(testObject.array[0])
+    testObject[0] = "hello"
+    print(testObject.array[0], "\n")
+
+    testObject[0] = "hi"
+    print(testObject.array[0], "\n")
+
+    # eq method
+    anotherObject = ArrayBasedList(3)
+    anotherObject.array[0] = "hi"
+    anotherObject.array[1] = 1
+    anotherObject.array[2] = False
+    print(testObject == otherObject)
+    print(testObject == anotherObject, "\n")
+
+    # append method
+    testObject.append("cat")
+    testObject.append(2)
+    print(str(testObject))
+    try:
+        testObject.append(False)
+    except:
+        print("Array is full", "\n")
+
+    # remove method
+    testObject.remove("cat")
+    testObject.remove(2)
+    print(str(testObject))
+    try:
+        testObject.remove("cat")
+    except:
+        print("Item not found.", "\n")
+
+    # insert method
+    testObject.insert(1, False)
+    print(str(testObject), "\n")
+    testObject.insert(-4, "hello")
+    print(str(testObject))
+    try:
+        testObject.insert(-4, "hello")
+    except:
+        print("Array full\n")
+
+    # delete
+    testObject.delete(-3)
+    print(str(testObject), "\n")
+    testObject.delete(0)
+    print(str(testObject), "\n")
+
+    otherObject.sort()
+    print(str(otherObject), "\n")
+    otherObject.sort(True)
+    print(str(otherObject))
+
+    # for k, v in ArrayBasedList.__dict__.items():
+    # if "function" in str(v):
+
+arrayTestFunc()
