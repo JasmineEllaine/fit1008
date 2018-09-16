@@ -36,35 +36,37 @@ class textEditor:
             self.lines.delete(num)
 
     def search(self, word):
-        pass
+        i = 0
+        for line in self.lines.lower():
+            if word in line:
+                print("Line", i)
 
     def run(self):
         userInput = input("Enter command: ").split()
-        while (userInput != "quit"):
+        while (userInput[0] != "quit"):
             tooShort = len(userInput) < 2
-            if (userInput == "insert"):
+            if (userInput[0] == "insert"):
                 textInsert = input("Enter line of text to insert: ")
                 if tooShort:
                     userInput += [None]
                 textEditor.insert(self, textInsert, userInput[1])
-            elif (userInput == "read"):
+            elif (userInput[0] == "read"):
                 textEditor.read(self, userInput[1])
-            elif (userInput == "write"):
+            elif (userInput[0] == "write"):
                 textEditor.write(self, userInput[1])
-            elif (userInput == "print"):
+            elif (userInput[0] == "print"):
                 textEditor.printLines(self, int(userInput[1]), int(userInput[2]))
-            elif (userInput == "delete"):
+            elif (userInput[0] == "delete"):
                 if tooShort:
                     textEditor.delete(self)
                 else:
                     textEditor.delete(self, int(userInput[1]))
-            elif (userInput == "search"):
-                pass
+            elif (userInput[0] == "search"):
+                textEditor.search(self, userInput[1])
             else: 
                 print("?")
                 raise Exception("Unrecognised command")
-
-            userInput = input("Enter command: ")
+            userInput = input("Enter command: ").split()
 
 if __name__ == "__main__":
     myEditor = textEditor()
