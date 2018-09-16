@@ -9,9 +9,9 @@ class Node:
         self.next = next
 
 class LinkedList: 
-    def __init__(self, head=None, last=None):
+    def __init__(self, head=None):
         self.head = head
-        self.last = last
+        self.last = head
 
     def isEmpty(self):
         # checks if linked list is empty
@@ -41,10 +41,26 @@ class LinkedList:
             current = current.next
         return False
 
-    def __getitem__(self, index):
+    # def __getitem__(self, index):
+
+    def append(self, item):
+        if (self.head == None):
+            self.head, self.last = [item, item]
+        else:
+            self.last.next = item
+            self.last = item
 
 def linkedTestFunc():
     # initialise list
-    myList = LinkedList()
+    aNode = Node(1)
+    bNode = Node(2)
+    cNode = Node(3)
+
+    aList = LinkedList(aNode)
+    print(str(aList))
+
+    aList.append(bNode)
+    aList.append(cNode)
+    print(str(aList))
 
 linkedTestFunc()
