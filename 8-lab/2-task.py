@@ -1,9 +1,25 @@
+# dynamic array
+
 from referential_array import build_array
 
 class ArrayBasedList:
-    def __init__(self, size):
-        self.array = build_array(size)
-        self.maxSize = size
+    def __init__(self):
+        self.array = build_array(20)
+        self.maxSize = 20
+
+    def increase(self):
+        self.maxSize *= 2
+        tmp = self.array
+        self.array = build_array(self.maxSize)
+        for i in tmp:
+            self.append(i)
+
+    def decrease(self):
+        self.maxSize //= 2
+        tmp = self.array
+        self.array = build_array(self.maxSize)
+        for i in tmp:
+            self.append(i)
 
     def __str__(self):
         string = ""
@@ -57,7 +73,8 @@ class ArrayBasedList:
         if len(self) < self.maxSize:
             self.array[len(self)] = item
         else:
-            raise IndexError("List is full")
+            self.increase()
+            self.append(item)
 
     def insert(self, index, item):
         if len(self) < self.maxSize:
@@ -72,7 +89,8 @@ class ArrayBasedList:
                 tmp2 = self.array[len(self)+index:]
                 self.array = tmp1 + [item] + tmp2
         else:
-            raise IndexError("List is full")
+            self.increase()
+            self.insert(index, item)
     
     def remove(self, item):
         # Deletes the first instance of item from the list. Raises a ValueError if item does
@@ -86,6 +104,12 @@ class ArrayBasedList:
                 else:
                     tmp2 = self.array[i+1:]
                 self.array = tmp1 + tmp2
+
+                # resize list
+                minSize = self.maxSize/8
+                while (len(self) < minSize):
+                    self.decrease()
+
                 return None
             i += 1
         raise ValueError("Item does not exist in self")
@@ -101,40 +125,45 @@ class ArrayBasedList:
             tmp1 = self.array[:abs(index)-1]
             tmp2 = self.array[abs(index):]
             self.array = tmp1 + tmp2
+        
+        # resize list
+        minSize = self.maxSize/8
+        while (len(self) < minSize):
+            self.decrease()
 
     def sort(self, reverse=False):
         if reverse:
-            for i in range(1, len(self.array)):
-                key = self.array[i]
+            for i in range(1, len(self)):
+                key = self[i]
                 j = i-1
-                while j >= 0 and key > self.array[j]:
-                        self.array[j+1] = self.array[j]
+                while j >= 0 and key > self[j]:
+                        self[j+1] = self[j]
                         j -= 1
-                self.array[j+1] = key        
+                self[j+1] = key        
         else:
-            for i in range(1, len(self.array)):
-                key = self.array[i]
+            for i in range(1, len(self)):
+                key = self[i]
                 j = i-1
-                while j >=0 and key < self.array[j] :
-                        self.array[j+1] = self.array[j]
+                while j >=0 and key < self[j]:
+                        self[j+1] = self[j]
                         j -= 1
-                self.array[j+1] = key
+                self[j+1] = key
 
 def arrayTestFunc():
     # function to test if array is working
     # make two lists
 
-    testObject = ArrayBasedList(5)
-    testObject.array[0] = "hi"
-    testObject.array[1] = 1
-    testObject.array[2] = True
+    testObject = ArrayBasedList()
+    testObject.append("hi")
+    testObject.append(1)
+    testObject.append(True)
 
-    otherObject = ArrayBasedList(5)
-    otherObject.array[0] = 2
-    otherObject.array[1] = 1
-    otherObject.array[2] = 5
-    otherObject.array[3] = 3
-    otherObject.array[4] = 4
+    otherObject = ArrayBasedList()
+    otherObject.append(2)
+    otherObject.append(1)
+    otherObject.append(5)
+    otherObject.append(3)
+    otherObject.append(4)
 
     # test str method
     print(str(testObject), "\n")
@@ -171,10 +200,10 @@ def arrayTestFunc():
     print(testObject.array[0], "\n")
 
     # eq method
-    anotherObject = ArrayBasedList(3)
-    anotherObject.array[0] = "hi"
-    anotherObject.array[1] = 1
-    anotherObject.array[2] = False
+    anotherObject = ArrayBasedList()
+    anotherObject.append = "hi"
+    anotherObject.append = 1
+    anotherObject.append = False
     print(testObject == otherObject)
     print(testObject == anotherObject, "\n")
 
