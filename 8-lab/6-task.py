@@ -31,7 +31,7 @@ class textEditor:
 
     def delete(self, num=None):
         if (num == None):
-            self.lines = ArrayBasedList()
+            self.lines = LinkedList()
         else:
             self.lines.delete(num)
 
