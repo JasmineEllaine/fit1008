@@ -100,7 +100,7 @@ class ArrayBasedList:
             tmp2 = self.array[abs(index):]
             self.array = tmp1 + tmp2
 
-    def sort(self, reverse):
+    def sort(self, reverse=False):
         if reverse:
             for i in range(1, len(self.array)):
                 key = self.array[i]

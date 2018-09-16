@@ -23,9 +23,7 @@ class Node:
 
 class LinkedList: 
     def __init__(self, head=None):
-        if head != None:
-            head = Node(head)
-        self.head = self.last = head
+        self.head = Node(head) if (head != None) else head
 
     def __str__(self):
         string = ""
@@ -103,10 +101,12 @@ class LinkedList:
     def append(self, item):
         item = Node(item)
         if (self.head == None):
-            self.head, self.last = [item, item]
+            self.head = item
         else:
-            self.last.next = item
-            self.last = item
+            curr = self.head
+            while (curr.next != None):
+                curr = curr.next
+            curr.next = item
 
     def insert(self, index, item):
         i = 0
@@ -171,6 +171,23 @@ class LinkedList:
             else:
                 curr.next = curr.next.next
 
+    def sort(self, reverse=False):
+        if reverse:
+            for i in range(1, len(self)):
+                key = self[i]
+                j = i-1
+                while j >= 0 and key > self[j]:
+                        self[j+1] = self[j]
+                        j -= 1
+                self[j+1] = key        
+        else:
+            for i in range(1, len(self)):
+                key = self[i]
+                j = i-1
+                while j >= 0 and key < self[j]:
+                        self[j+1] = self[j]
+                        j -= 1
+                self[j+1] = key   
 
 def linkedTestFunc():
     # str method
@@ -226,5 +243,15 @@ def linkedTestFunc():
     print(bList)
     bList.delete(-1)
     print(bList, "\n")
+
+    # sort
+    bList.append(0)
+    bList.append(4)
+    bList.append(3)
+    print(bList)
+    bList.sort()
+    print(bList)
+    bList.sort(True)
+    print(bList)
 
 linkedTestFunc()
