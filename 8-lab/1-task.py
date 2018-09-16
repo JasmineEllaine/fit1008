@@ -69,6 +69,8 @@ class ArrayBasedList:
                 tmp1 = self.array[:abs(index)-1]
                 tmp2 = self.array[abs(index)-1:-1]
                 self.array = tmp1 + [item] + tmp2
+        else:
+            raise IndexError("List is full")
     
     def remove(self, item):
         # Deletes the first instance of item from the list. Raises a ValueError if item does

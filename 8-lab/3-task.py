@@ -108,6 +108,70 @@ class LinkedList:
             self.last.next = item
             self.last = item
 
+    def insert(self, index, item):
+        i = 0
+        current = self.head
+        item = Node(item)
+
+        if index not in range(-len(self), len(self)+1):
+            raise IndexError("Cannot be inserted in this index.")
+        elif index >= 0:
+            while (i < index-1):
+                i += 1
+                current = current.next
+            if (index == 0):
+                item.next = self.head
+                self.head = item
+            else:
+                item.next = current.next
+                current.next = item
+        elif index < 0:
+            while (i < (len(self)+index-1)):
+                i += 1
+                current = current.next
+            if (index == 0) or (index == -(len(self))):
+                item.next = self.head
+                self.head = item
+            else:
+                item.next = current.next
+                current.next = item
+
+    def remove(self, item):
+        curr = prev = self.head
+        while (curr != None):
+            if (curr == self.head):
+                self.head = curr.next
+                return item
+            if (curr.value == item) and (type(curr.value) == type(item)):
+                prev.next = curr.next
+                return item
+            prev = curr
+            curr = curr.next
+
+    def delete(self, index):
+        i = 0
+        curr = self.head
+
+        if index not in range(-len(self), len(self)):
+            raise IndexError("Cannot be deleted")
+        elif index >= 0:
+            while (i < index-1):
+                i += 1
+                curr = curr.next
+            if (index == 0):
+                self.head = curr.next
+            else:
+                curr.next = curr.next.next
+        elif index < 0:
+            while (i < (len(self)+index-1)):
+                i += 1
+                curr = curr.next
+            if (index == 0) or (index == -(len(self))):
+                self.head = curr.next
+            else:
+                curr.next = curr.next.next
+
+
 def linkedTestFunc():
     # str method
     aList = LinkedList()
@@ -143,8 +207,24 @@ def linkedTestFunc():
     print(bList == cList, "\n")
 
     # append
-    print(str(aList))
     aList.append(5)
-    print(str(aList))
+    print(str(aList), "\n")
+
+    # insert
+    print(str(bList))
+    bList.insert(0, 0)
+    print(bList)
+    bList.insert(-4, 5)
+    print(bList)
+
+    # remove
+    bList.remove(0)
+    print(bList, "\n")
+
+    # delete
+    bList.delete(0)
+    print(bList)
+    bList.delete(-1)
+    print(bList, "\n")
 
 linkedTestFunc()
