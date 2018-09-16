@@ -248,10 +248,15 @@ def linkedTestFunc():
     bList.append(0)
     bList.append(4)
     bList.append(3)
+
     print(bList)
     bList.sort()
     print(bList)
     bList.sort(True)
     print(bList)
+
+    # iterable
+    for i in bList:
+        print(i)
 
 linkedTestFunc()
