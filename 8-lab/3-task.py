@@ -13,24 +13,20 @@ class LinkedList:
         self.head = head
         self.last = head
 
-    def isEmpty(self):
-        # checks if linked list is empty
-        return (self.head == self.last == None)
-
     def __str__(self):
         string = ""
         current = self.head
-        if not self.isEmpty():
-            while (current.next != None):
-                string += current.value + ", "
-            return string[:-2]
-        return string
+        while (current != None):
+            string += str(current.value) + ", "
+            current = current.next
+        return string[:-2]
 
     def __len__(self):
         current = self.head
-        i = 0 if (current.next == None) else (1)
-        while (current.next != None):
+        i = 0 if (current == None) else (1)
+        while (current != None):
             i += 1
+            current = current.next
         return i
 
     def __contains__(self, item):
@@ -51,16 +47,22 @@ class LinkedList:
             self.last = item
 
 def linkedTestFunc():
-    # initialise list
+    # initialise nodes
     aNode = Node(1)
     bNode = Node(2)
     cNode = Node(3)
 
-    aList = LinkedList(aNode)
+    # str method
+    aList = LinkedList()
     print(str(aList))
+    bList = LinkedList(aNode)
+    print(str(bList))
+    bList.append(bNode)
+    bList.append(cNode)
+    print(str(bList), "\n")
 
-    aList.append(bNode)
-    aList.append(cNode)
-    print(str(aList))
+    # len method
+    print(len(aList))
+    print(len(bList))
 
 linkedTestFunc()
