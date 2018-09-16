@@ -23,7 +23,7 @@ class LinkedList:
 
     def __len__(self):
         current = self.head
-        i = 0 if (current == None) else (1)
+        i = 0
         while (current != None):
             i += 1
             current = current.next
