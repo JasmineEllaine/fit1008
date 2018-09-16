@@ -63,6 +63,10 @@ def linkedTestFunc():
 
     # len method
     print(len(aList))
-    print(len(bList))
+    print(len(bList), "\n")
+
+    # contains method
+    print(1 in bList)
+    print(True in bList, "\n")
 
 linkedTestFunc()
