@@ -37,7 +37,22 @@ class LinkedList:
             current = current.next
         return False
 
-    # def __getitem__(self, index):
+    def __getitem__(self, index):
+        i = 0
+        current = self.head
+        
+        if index not in range(-len(self), len(self)):
+            raise IndexError("Index out of range of list.")
+        elif index >= 0:
+            while (i < index):
+                i += 1
+                current = current.next
+            return current.value
+        elif index < 0:
+            while (i < (len(self)+index)):
+                i += 1
+                current = current.next
+            return current.value
 
     def append(self, item):
         if (self.head == None):
@@ -68,5 +83,8 @@ def linkedTestFunc():
     # contains method
     print(1 in bList)
     print(True in bList, "\n")
+
+    # get item method
+    print(bList[0])
 
 linkedTestFunc()
