@@ -4,14 +4,28 @@
 """
  
 class Node:
+    """ Checks if a given year is a leap year
+    Args:
+        year (int): year to be checked
+    Returns:
+        True (bool): if leap year
+        False (bool): if not a leap year
+    Raises:
+        No exceptions
+    Precondition:
+        year > 1582
+    Complexity:
+        O(1)
+    """
     def __init__(self, value=None, next=None):
         self.value = value
         self.next = next
 
 class LinkedList: 
     def __init__(self, head=None):
-        self.head = head
-        self.last = head
+        if head != None:
+            head = Node(head)
+        self.head = self.last = head
 
     def __str__(self):
         string = ""
@@ -54,7 +68,40 @@ class LinkedList:
                 current = current.next
             return current.value
 
+    def __setitem__(self, index, item):
+        i = 0
+        current = self.head
+        
+        if index not in range(-len(self), len(self)):
+            raise IndexError("Index out of range of list.")
+        elif index >= 0:
+            while (i < index):
+                i += 1
+                current = current.next
+            current.value = item
+        elif index < 0:
+            while (i < (len(self)+index)):
+                i += 1
+                current = current.next
+            current.value = item
+
+    def __eq__(self, other):
+        if len(self) == len(other):
+            currentSelf = self.head
+            currentOther = other.head
+            i = 1
+            while (i < len(self)):
+                if (currentSelf.value != currentOther.value):
+                # doesnt account for 1 == True
+                    return False
+                currentSelf = currentSelf.next
+                currentOther = currentOther.next
+                i += 1
+            return True
+        return False
+
     def append(self, item):
+        item = Node(item)
         if (self.head == None):
             self.head, self.last = [item, item]
         else:
@@ -62,18 +109,13 @@ class LinkedList:
             self.last = item
 
 def linkedTestFunc():
-    # initialise nodes
-    aNode = Node(1)
-    bNode = Node(2)
-    cNode = Node(3)
-
     # str method
     aList = LinkedList()
     print(str(aList))
-    bList = LinkedList(aNode)
+    bList = LinkedList(1)
     print(str(bList))
-    bList.append(bNode)
-    bList.append(cNode)
+    bList.append(2)
+    bList.append(3)
     print(str(bList), "\n")
 
     # len method
@@ -85,6 +127,24 @@ def linkedTestFunc():
     print(True in bList, "\n")
 
     # get item method
-    print(bList[0])
+    print(bList[2])
+    print(bList[-3], "\n")
+    # print(bList[3]) # error
+
+    # set item
+    bList[0] = 2
+    print(str(bList))
+    bList[-3] = 1
+    print(str(bList), "\n")
+
+    # eq method
+    cList = bList
+    print(aList == bList)
+    print(bList == cList, "\n")
+
+    # append
+    print(str(aList))
+    aList.append(5)
+    print(str(aList))
 
 linkedTestFunc()
