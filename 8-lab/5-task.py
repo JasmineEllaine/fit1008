@@ -2,7 +2,6 @@ from task2 import ArrayBasedList
 
 class textEditor:
     def __init__(self):
-        self.commands = ["insert", "read", "write", "print", "delete", "search", "quit"]
         self.lines = ArrayBasedList()
 
     def insert(self, text, num=None):
@@ -10,16 +9,61 @@ class textEditor:
             print("?")
             raise Exception("No 'num' value provided")
         else:
-            self.lines.insert(num, text)
+            self.lines.insert(int(num), text)
 
     def read(self, filename):
         file = open(filename)
         for line in file:
             self.lines.append(line.strip())
+        file.close()
+
+    def write(self, filename):
+        file = open(filename, "w")
+        for item in self.lines:
+            file.write("{}\n".format(item))
+        file.close()
+
+    def printLines(self, num1, num2):
+        if (num1 < num2):
+            while (num1 < num2):
+                print(self.lines[num1])
+                num1 += 1
+
+    def delete(self, num=None):
+        if (num == None):
+            self.lines = ArrayBasedList()
+        else:
+            self.lines.delete(num)
+
+    def search(self, word):
+        pass
 
     def run(self):
-        userInput = input("Enter command: ")
+        userInput = input("Enter command: ").split()
         while (userInput != "quit"):
+            tooShort = len(userInput) < 2
+            if (userInput == "insert"):
+                textInsert = input("Enter line of text to insert: ")
+                if tooShort:
+                    userInput += [None]
+                textEditor.insert(self, textInsert, userInput[1])
+            elif (userInput == "read"):
+                textEditor.read(self, userInput[1])
+            elif (userInput == "write"):
+                textEditor.write(self, userInput[1])
+            elif (userInput == "print"):
+                textEditor.printLines(self, int(userInput[1]), int(userInput[2]))
+            elif (userInput == "delete"):
+                if tooShort:
+                    textEditor.delete(self)
+                else:
+                    textEditor.delete(self, int(userInput[1]))
+            elif (userInput == "search"):
+                pass
+            else: 
+                print("?")
+                raise Exception("Unrecognised command")
+
             userInput = input("Enter command: ")
 
 if __name__ == "__main__":
