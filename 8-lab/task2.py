@@ -455,6 +455,8 @@ def arrayTestFunc():
     print(str(otherObject), "\n")
     otherObject.sort(True)
     print(str(otherObject))
+    
+    print(testObject.maxSize)
 
     # for k, v in ArrayBasedList.__dict__.items():
     # if "function" in str(v):

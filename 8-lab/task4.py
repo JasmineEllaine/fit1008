@@ -6,7 +6,7 @@ def fileToArray(filename, aList):
     """ Reads filename into aList
     Args:
         filename (str): name of file to be read
-        aList(ArrayBasedList): list where file is to be written
+        aList (ArrayBasedList): list where file is to be written
     Returns:
         None
     Raises:
@@ -27,7 +27,7 @@ def fileToLinkedList(filename, aList):
     """ Reads filename into aList
     Args:
         filename (str): name of file to be read
-        aList(LinkedList): list where file is to be written
+        aList (LinkedList): list where file is to be written
     Returns:
         None
     Raises:
@@ -49,3 +49,6 @@ fileToArray("listItems.txt", array)
 
 linked = LinkedList()
 fileToArray("listItems.txt", linked)
+
+print(array)
+print(linked)

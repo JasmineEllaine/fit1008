@@ -302,7 +302,7 @@ def arrayTestFunc():
 
     testObject = ArrayBasedList(5)
     testObject.array[0] = "hi"
-    testObject.array[1] len .array
+    testObject.array[1] = 1
     testObject.array[2] = True
 
     otherObject = ArrayBasedList(5)
@@ -388,6 +388,7 @@ def arrayTestFunc():
     testObject.delete(0)
     print(str(testObject), "\n")
 
+    # sort
     otherObject.sort()
     print(str(otherObject), "\n")
     otherObject.sort(True)
