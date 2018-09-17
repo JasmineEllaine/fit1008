@@ -73,7 +73,7 @@ class ArrayBasedList:
         Args:
             item (any): an item to be checked if in list
         Returns:
-            bool: True for success, False otherwise.
+            bool: True if item in self, False otherwise.
         Raises:
             No exceptions
         Precondition:
@@ -91,13 +91,13 @@ class ArrayBasedList:
     def __getitem__(self, index):
         """ Returns the item at a given index
         Args:
-            item (any): an item to be checked if in list
+            index (int): the index from which the item will be returned
         Returns:
-            bool: True for success, False otherwise.
+            the return value (any): item at self.array[index]
         Raises:
-            No exceptions
+            IndexError: if index is not in range of -len(self) and len(self)
         Precondition:
-            None
+            index must be in range as stated in raises above
         Postcondition:
             None
         Complexity:
@@ -111,6 +111,20 @@ class ArrayBasedList:
             return self.array[len(self)+index]
 
     def __setitem__(self, index, item):
+        """ Returns the item at a given index
+        Args:
+            index (int): the index from which the item will be returned
+        Returns:
+            the return value (any): item at self.array[index]
+        Raises:
+            IndexError: if index is not in range of -len(self) and len(self)
+        Precondition:
+            index must be in range as stated in raises above
+        Postcondition:
+            None
+        Complexity:
+            O(1)
+        """
         if index not in range(-len(self), len(self)):
             raise IndexError("Index out of range of list")
         elif index >= 0:
@@ -119,6 +133,20 @@ class ArrayBasedList:
             self.array[len(self)+index] = item
 
     def __eq__(self, other):
+        """ Checks if self is equivalent to other
+        Args:
+            other (ArrayBasedList): the object to be compared against
+        Returns:
+            bool: True if equivalent, False otherwise.
+        Raises:
+            None
+        Precondition:
+            None
+        Postcondition:
+            None
+        Complexity:
+            O(n)
+        """
         if len(self) == len(other):
             i = 0
             while i < len(self):
@@ -129,12 +157,43 @@ class ArrayBasedList:
         return False
 
     def append(self, item):
+        """ Adds item to the end of self.array
+        Args:
+            item (any): the object to be appended
+        Returns:
+            None
+        Raises:
+            IndexError: if self.array is full
+        Precondition:
+            list is not full
+        Postcondition:
+            item will be appended to list
+        Complexity:
+            O(n)
+        """
         if len(self) < self.maxSize:
             self.array[len(self)] = item
         else:
             raise IndexError("List is full")
 
     def insert(self, index, item):
+        """ Inserts item in the index given
+        Args:
+            item (any): the object to be inserted
+            index (any): index where item will be inserted
+        Returns:
+            None
+        Raises:
+            IndexError: if index is not in range(-len(self), len(self))
+            IndexError: if list is full
+        Precondition:
+            list is not full
+            index is in range
+        Postcondition:
+            item will be inserted to list
+        Complexity:
+            O(1)
+        """
         if len(self) < self.maxSize:
             if index not in range(-len(self), len(self)):
                 raise IndexError("Index out of range of list")
@@ -150,8 +209,20 @@ class ArrayBasedList:
             raise IndexError("List is full")
     
     def remove(self, item):
-        # Deletes the first instance of item from the list. Raises a ValueError if item does
-        # not exist in self
+        """ Deletes the first instance of item from the list
+        Args:
+            item (any): the object to be deleted
+        Returns:
+            None: if removing item is successful
+        Raises:
+            ValueError: if item does not exist in self
+        Precondition:
+            item exists in self
+        Postcondition:
+            item will be removed from list
+        Complexity:
+            O(n)
+        """
         i = 0
         while (i < len(self)):
             if (self.array[i] == item) and (type(self.array[i]) == type(item)):
@@ -166,6 +237,20 @@ class ArrayBasedList:
         raise ValueError("Item does not exist in self")
 
     def delete(self, index):
+        """ Deletes item at a given index
+        Args:
+            index (int): the index where item will be deleted
+        Returns:
+            None
+        Raises:
+            IndexError: if index is not in range(-len(self), len(self))
+        Precondition:
+            index is in range
+        Postcondition:
+            item will be deleted from list
+        Complexity:
+            O(1)
+        """
         if index not in range(-len(self), len(self)):
             raise IndexError("Index out of range of list")
         elif index >= 0:
@@ -178,6 +263,22 @@ class ArrayBasedList:
             self.array = tmp1 + tmp2
 
     def sort(self, reverse=False):
+        """ Sorts a list in ascending or descending order
+        Args:
+            reverse (bool): optional, states how list is to be sorted
+        Returns:
+            None
+        Raises:
+            None
+        Precondition:
+            list contains objects that are comparable
+        Postcondition:
+            list will be sorted in eitehr ascending or descending order
+        Complexity:
+            O(n^2) - if array is sorted in the reverse order that
+                it is to be sorted
+            o(n)   - all other times 
+        """
         if reverse:
             for i in range(1, len(self.array)):
                 key = self.array[i]
