@@ -47,11 +47,11 @@ class ArrayBasedList:
         return string[:-1]
 
     def __len__(self):
-        """ Gets string representation of self
+        """ Gets len of self.array
         Args:
             None
         Returns:
-            string (str): string representation of self
+            i (int): len of self
         Raises:
             No exceptions
         Precondition:
@@ -302,7 +302,7 @@ def arrayTestFunc():
 
     testObject = ArrayBasedList(5)
     testObject.array[0] = "hi"
-    testObject.array[1] = 1
+    testObject.array[1] len .array
     testObject.array[2] = True
 
     otherObject = ArrayBasedList(5)

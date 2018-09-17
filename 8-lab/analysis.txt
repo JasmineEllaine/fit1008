@@ -17,3 +17,11 @@ Searching can be either binary or linear with an array based list,
 
 There is less memory required for an array based list, however a
     linked list is more efficient at utilising memory.
+
+
+Time Complexity:
+            linked      array
+Insert      O(1)        O(1)
+Delete      O(1)        O(n)
+Search      O(n)        O(n)
+Access      O(n)        O(n)

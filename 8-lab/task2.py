@@ -93,11 +93,11 @@ class ArrayBasedList:
         return string[:-1]
 
     def __len__(self):
-        """ Gets string representation of self
+        """ Gets len of self.array
         Args:
             None
         Returns:
-            string (str): string representation of self
+            i (int): len of self
         Raises:
             No exceptions
         Precondition:
@@ -215,7 +215,8 @@ class ArrayBasedList:
         Postcondition:
             item will be appended to list
         Complexity:
-            O(n)
+            O(1) - if list is not full
+            O(n) - 
         """
         if len(self) < self.maxSize:
             self.array[len(self)] = item

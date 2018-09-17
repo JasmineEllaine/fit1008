@@ -4,28 +4,54 @@
 """
  
 class Node:
-    """ Checks if a given year is a leap year
-    Args:
-        year (int): year to be checked
-    Returns:
-        True (bool): if leap year
-        False (bool): if not a leap year
-    Raises:
-        No exceptions
-    Precondition:
-        year > 1582
-    Complexity:
-        O(1)
-    """
     def __init__(self, value=None, next=None):
+        """ Node constructor
+        Args:
+            value (any): value of node
+            next (Node): next node
+        Precondition:
+            None
+        Postcondition:
+            Node is initilialised
+        Complexity:
+            O(1)
+        """
         self.value = value
         self.next = next
 
 class LinkedList: 
     def __init__(self, head=None):
+        """ Constructor for LinkedList
+        Args:
+            head (Node): optional
+        Returns:
+            None
+        Raises:
+            No exceptions
+        Precondition:
+            None
+        Postcondition:
+            None
+        Complexity:
+            O(1)
+        """
         self.head = Node(head) if (head != None) else head
 
     def __str__(self):
+        """ Gets string representation of self
+        Args:
+            None
+        Returns:
+            string (str): string representation of self
+        Raises:
+            No exceptions
+        Precondition:
+            None
+        Postcondition:
+            None
+        Complexity:
+            O(n)
+        """
         string = ""
         current = self.head
         while (current != None):
@@ -34,6 +60,20 @@ class LinkedList:
         return string[:-1]
 
     def __len__(self):
+        """ Gets len of self.array
+        Args:
+            None
+        Returns:
+            i (int): len of self
+        Raises:
+            No exceptions
+        Precondition:
+            None
+        Postcondition:
+            None
+        Complexity:
+            O(n)
+        """
         current = self.head
         i = 0
         while (current != None):
@@ -42,6 +82,20 @@ class LinkedList:
         return i
 
     def __contains__(self, item):
+        """ Checks if item is in self
+        Args:
+            item (any): an item to be checked if in list
+        Returns:
+            bool: True if item in self, False otherwise.
+        Raises:
+            No exceptions
+        Precondition:
+            None
+        Postcondition:
+            None
+        Complexity:
+            O(n)
+        """
         current = self.head
         while (current != None):
             if (current.value == item) and (type(current.value) == type(item)):
@@ -50,6 +104,20 @@ class LinkedList:
         return False
 
     def __getitem__(self, index):
+        """ Returns the item at a given index
+        Args:
+            index (int): the index from which the item will be returned
+        Returns:
+            the return value (any): item at self.array[index]
+        Raises:
+            IndexError: if index is not in range of -len(self) and len(self)
+        Precondition:
+            index must be in range as stated in raises above
+        Postcondition:
+            None
+        Complexity:
+            O(n)
+        """
         i = 0
         current = self.head
         
@@ -67,6 +135,20 @@ class LinkedList:
             return current.value
 
     def __setitem__(self, index, item):
+        """ Returns the item at a given index
+        Args:
+            index (int): the index from which the item will be returned
+        Returns:
+            the return value (any): item at self.array[index]
+        Raises:
+            IndexError: if index is not in range of -len(self) and len(self)
+        Precondition:
+            index must be in range as stated in raises above
+        Postcondition:
+            None
+        Complexity:
+            O(1)
+        """
         i = 0
         current = self.head
         
@@ -84,6 +166,20 @@ class LinkedList:
             current.value = item
 
     def __eq__(self, other):
+        """ Checks if self is equivalent to other
+        Args:
+            other (ArrayBasedList): the object to be compared against
+        Returns:
+            bool: True if equivalent, False otherwise.
+        Raises:
+            None
+        Precondition:
+            None
+        Postcondition:
+            None
+        Complexity:
+            O(n)
+        """
         if len(self) == len(other):
             currentSelf = self.head
             currentOther = other.head
@@ -99,6 +195,20 @@ class LinkedList:
         return False
 
     def append(self, item):
+        """ Adds item to the end of self.array
+        Args:
+            item (any): the object to be appended
+        Returns:
+            None
+        Raises:
+            None
+        Precondition:
+            None
+        Postcondition:
+            item will be appended to list
+        Complexity:
+            O(1)
+        """
         item = Node(item)
         if (self.head == None):
             self.head = item
@@ -109,6 +219,22 @@ class LinkedList:
             curr.next = item
 
     def insert(self, index, item):
+        """ Inserts item in the index given
+        Args:
+            item (any): the object to be inserted
+            index (any): index where item will be inserted
+        Returns:
+            None
+        Raises:
+            IndexError: if index is not in range(-len(self), len(self))
+        Precondition:
+            index is in range
+        Postcondition:
+            item will be inserted to list
+        Complexity:
+            O(1) – if list is not full before inserting
+            O(n) – if list is full before inserting
+        """
         i = 0
         current = self.head
         item = Node(item)
@@ -137,6 +263,22 @@ class LinkedList:
                 current.next = item
 
     def remove(self, item):
+        """ Deletes the first instance of item from the list
+        Args:
+            item (any): the object to be deleted
+        Returns:
+            None: if removing item is successful
+        Raises:
+            ValueError: if item does not exist in self
+        Precondition:
+            item exists in self
+        Postcondition:
+            item will be removed from list
+        Complexity:
+            O(n^2)  - if list occupies 1/8 of the allocated space
+                before removing item
+            O(n)    - all other times
+        """
         curr = prev = self.head
         while (curr != None):
             if (curr == self.head):
@@ -149,6 +291,22 @@ class LinkedList:
             curr = curr.next
 
     def delete(self, index):
+        """ Deletes item at a given index
+        Args:
+            index (int): the index where item will be deleted
+        Returns:
+            None
+        Raises:
+            IndexError: if index is not in range(-len(self), len(self))
+        Precondition:
+            index is in range
+        Postcondition:
+            item will be deleted from list
+        Complexity:
+            O(n) - if list occupies 1/8 of the allocated space
+                before removing item
+            O(1) - if no list resizing needed
+        """
         i = 0
         curr = self.head
 
@@ -172,6 +330,22 @@ class LinkedList:
                 curr.next = curr.next.next
 
     def sort(self, reverse=False):
+        """ Sorts a list in ascending or descending order
+        Args:
+            reverse (bool): optional, states how list is to be sorted
+        Returns:
+            None
+        Raises:
+            None
+        Precondition:
+            list contains objects that are comparable
+        Postcondition:
+            list will be sorted in eitehr ascending or descending order
+        Complexity:
+            O(n^2) - if array is sorted in the reverse order that
+                it is to be sorted
+            o(n)   - all other times 
+        """
         if reverse:
             for i in range(1, len(self)):
                 key = self[i]
