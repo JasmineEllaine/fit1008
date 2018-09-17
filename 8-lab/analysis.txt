@@ -1,0 +1,19 @@
+Write a page of text, using what you know of theory to analyse
+how the performance of your text editor would change when
+switching implementations.
+
+The complexity will change for certain functions.
+
+Insertion and deletion will be faster and more efficient with 
+    linked lists as shifting indices is not required like in
+    an array. 
+
+Accessing an item more direct with an array, as opposed to a
+    linked list where you must first traverse through the items
+    until the one needed is found.
+
+Searching can be either binary or linear with an array based list,
+    while it is only linear through a linked list.
+
+There is less memory required for an array based list, however a
+    linked list is more efficient at utilising memory.

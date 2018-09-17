@@ -1,13 +1,47 @@
-# dynamic array
+""" Task 2
+    
+    Implementing a dynamic Array Based List.
+"""
 
 from referential_array import build_array
 
 class ArrayBasedList:
     def __init__(self):
+        """ Constructor for ArrayBasedList
+        Args:
+            None
+        Returns:
+            None
+        Raises:
+            No exceptions
+        Precondition:
+            initial size of array == 20
+        Postcondition:
+            max size of array doubles if full, halves if contents
+                occupy less than 1/8 of the max size
+        Complexity:
+            O(1)
+        """
         self.array = build_array(20)
         self.maxSize = 20
 
     def increase(self):
+        """ Increases the size of the array
+        Args:
+            None
+        Returns:
+            None
+        Raises:
+            No exceptions
+        Precondition:
+            maxSize > 0
+        Postcondition:
+            maxSize will be doubled
+            array is a new array with size maxSize and its previous
+                contents preserved
+        Complexity:
+            O(n)
+        """
         self.maxSize *= 2
         tmp = self.array
         self.array = build_array(self.maxSize)
@@ -15,6 +49,22 @@ class ArrayBasedList:
             self.append(i)
 
     def decrease(self):
+        """ Decreases the size of the array
+        Args:
+            None
+        Returns:
+            None
+        Raises:
+            No exceptions
+        Precondition:
+            maxSize >= 0
+        Postcondition:
+            maxSize will be halved
+            array is a new array with size maxSize and its previous
+                contents preserved
+        Complexity:
+            O(n)
+        """
         self.maxSize //= 2
         tmp = self.array
         self.array = build_array(self.maxSize)
@@ -22,6 +72,20 @@ class ArrayBasedList:
             self.append(i)
 
     def __str__(self):
+        """ Gets string representation of self
+        Args:
+            None
+        Returns:
+            string (str): string representation of self
+        Raises:
+            No exceptions
+        Precondition:
+            None
+        Postcondition:
+            None
+        Complexity:
+            O(n)
+        """
         string = ""
         for elem in self.array:
             if elem != None:
@@ -29,6 +93,20 @@ class ArrayBasedList:
         return string[:-1]
 
     def __len__(self):
+        """ Gets string representation of self
+        Args:
+            None
+        Returns:
+            string (str): string representation of self
+        Raises:
+            No exceptions
+        Precondition:
+            None
+        Postcondition:
+            None
+        Complexity:
+            O(n)
+        """
         i = 0
         try: 
             while (i < self.maxSize) and (self.array[i] is not None):
@@ -37,6 +115,20 @@ class ArrayBasedList:
             return i
     
     def __contains__(self, item):
+        """ Checks if item is in self
+        Args:
+            item (any): an item to be checked if in list
+        Returns:
+            bool: True for success, False otherwise.
+        Raises:
+            No exceptions
+        Precondition:
+            None
+        Postcondition:
+            None
+        Complexity:
+            O(n)
+        """
         for elem in self.array:
             if item == elem:
                 return True

@@ -1,11 +1,44 @@
+""" Task 1
+    
+    Implementing an Array Based List and its methods.
+"""
+
 from referential_array import build_array
 
 class ArrayBasedList:
     def __init__(self, size):
+        """ Constructor for ArrayBasedList
+        Args:
+            size (int): maximum size of the list
+        Returns:
+            None
+        Raises:
+            No exceptions
+        Precondition:
+            size cannot be negative    
+        Postcondition:
+            len(self.array) <= size
+        Complexity:
+            O(1)
+        """
         self.array = build_array(size)
         self.maxSize = size
 
     def __str__(self):
+        """ Gets string representation of self
+        Args:
+            None
+        Returns:
+            string (str): string representation of self
+        Raises:
+            No exceptions
+        Precondition:
+            None
+        Postcondition:
+            None
+        Complexity:
+            O(n)
+        """
         string = ""
         for elem in self.array:
             if elem != None:
@@ -14,6 +47,20 @@ class ArrayBasedList:
         return string[:-1]
 
     def __len__(self):
+        """ Gets string representation of self
+        Args:
+            None
+        Returns:
+            string (str): string representation of self
+        Raises:
+            No exceptions
+        Precondition:
+            None
+        Postcondition:
+            None
+        Complexity:
+            O(n)
+        """
         i = 0
         try: 
             while (i < self.maxSize) and (self.array[i] is not None):
@@ -22,12 +69,40 @@ class ArrayBasedList:
             return i
     
     def __contains__(self, item):
+        """ Checks if item is in self
+        Args:
+            item (any): an item to be checked if in list
+        Returns:
+            bool: True for success, False otherwise.
+        Raises:
+            No exceptions
+        Precondition:
+            None
+        Postcondition:
+            None
+        Complexity:
+            O(n)
+        """
         for elem in self.array:
             if item == elem:
                 return True
         return False
 
     def __getitem__(self, index):
+        """ Returns the item at a given index
+        Args:
+            item (any): an item to be checked if in list
+        Returns:
+            bool: True for success, False otherwise.
+        Raises:
+            No exceptions
+        Precondition:
+            None
+        Postcondition:
+            None
+        Complexity:
+            O(n)
+        """
         if index not in range(-len(self), len(self)):
             raise IndexError("Index out of range of list")
         elif index >= 0:
@@ -220,4 +295,5 @@ def arrayTestFunc():
     # for k, v in ArrayBasedList.__dict__.items():
     # if "function" in str(v):
 
-arrayTestFunc()
+if __name__ == "__main__":
+    arrayTestFunc()
