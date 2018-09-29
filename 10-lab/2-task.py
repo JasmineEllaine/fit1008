@@ -36,9 +36,23 @@ def dynamicKnapsack(c, n, v, w):
             else:
                 solArr[i][j] = solArr[i-1][j]
 
-    return [solArr, keepArr]
+    # get maximum value of solArray
+    sol = max(map(max, solArr))
+    items = [0]*(n+1)
 
-# sol, keep = dynamicKnapsack(5, 3, [0, 5, 3, 4], [0, 3, 2, 1])
+    # get items in knapsack
+    while n != 0:
+        if keepArr[n][c] == 1:
+            items[n] = 1
+            c -= w[n]
+            n -= 1
+        else:
+            n -= 1
+
+    return [sol, items]
+
+sol, items = dynamicKnapsack(5, 3, [0, 5, 3, 4], [0, 3, 2, 1])
+print(sol, items)
 
 # print("sol:")
 # for i in sol:
