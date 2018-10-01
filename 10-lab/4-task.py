@@ -7,6 +7,22 @@ and a width M , determine what constitutes a solution to the
 from math import inf
 
 def justify(l, m):
+    """ Solves the text justification problem
+    Args:
+        l (list) = text to be justified, each word is a separate list entry
+        m (list) = width of a line
+    Returns:
+        minCost (int) = min cost of justified text
+        text (list) = indices for which text will be printed on which line
+    Raises:
+        No exceptions
+    Precondition:
+        None
+    Postcondition:
+        None
+    Complexity:
+        O(n^2)
+    """
     # len of list
     n = len(l)
     costArr = [[0]*n for _ in range(n)]
@@ -21,7 +37,7 @@ def justify(l, m):
             if space < 0:
                 costArr[i][j] = inf
             else:
-                costArr[i][j] = space**2
+                costArr[i][j] = space**3
 
     minCost = ["null"]*(n)
     text = ["null"]*(n)
@@ -39,16 +55,42 @@ def justify(l, m):
         else:
             possibleCosts = {}
             while j > i:
-                possibleCosts[j] = costArr[i][j-1] + costArr[j][n-1]
+                possibleCosts[j] = costArr[i][j-1] + minCost[j]
                 j -= 1
-            index = min(possibleCosts)
-            minCost[i] = possibleCosts[index]
-            text[i] = index
+            minValue = min(possibleCosts.values())
+            minCost[i] = minValue
+            # reverse dict to get the key corresponding to min value
+            reversedCosts = dict(zip(possibleCosts.values(),possibleCosts.keys()))
+            text[i] = reversedCosts[minValue]
             i -= 1
             j = n-1
 
-    return minCost, text
+    return sum(minCost), text
     
-minCostList, textList = justify("Tushar roy likes to code".split(), 10)
-print(minCostList)
-print(textList)
+def printText(l, j):
+    """ Prints justified text given the indices from the justify function
+    Args:
+        l (list) = text to be justified, each word is a separate list entry
+        j (list) = indices to be used for justification
+    Returns:
+        minCost (int) = min cost of justified text
+        text (list) = indices for which text will be printed on which line
+    Raises:
+        No exceptions
+    Precondition:
+        None
+    Postcondition:
+        None
+    Complexity:
+        O(n^2)
+    """
+    i = 0
+    while i < len(l):
+        # print words in list starting from index, up to but not including the index given in j
+        print(" ".join(l[i:j[i]]))
+        i = j[i]
+    
+sentence = "you can use dynamic programming to justify text and I learned that in FIT1008".split()
+minCost, textList = justify(sentence, 15)
+print(minCost)
+printText(sentence, textList)
