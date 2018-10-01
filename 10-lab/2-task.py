@@ -1,17 +1,24 @@
-"""
-    c = capacity int
-    v = value array
-    w = weight array
-    n = number of items
-
-    i = item number
-    j = curr capacity
-
-    PRECONDITION = weight is sorted in descending order
-"""
 from copy import deepcopy
 
 def dynamicKnapsack(c, n, v, w):
+    """ Solves the knapsack problem using dynamic programming
+    Args:
+        c (int) = knapsack capacity
+        v (list) = values os items
+        w (list) = weight of items
+        n (int) = number of items
+    Returns:
+        sol (int) = maximum value of items taken
+        items (list) = items taken in knapsack in bit list form
+    Raises:
+        No exceptions
+    Precondition:
+        Weight and corresponding value must be sorted in order of descending weight
+    Postcondition:
+        None
+    Complexity:
+        O(n^2)
+    """
     solArr = [[0]*(c+1) for _ in range(n+1)]
     keepArr = deepcopy(solArr)
 
@@ -53,11 +60,3 @@ def dynamicKnapsack(c, n, v, w):
 
 sol, items = dynamicKnapsack(5, 3, [0, 5, 3, 4], [0, 3, 2, 1])
 print(sol, items)
-
-# print("sol:")
-# for i in sol:
-#     print(i)
-
-# print("\nkeep:")
-# for i in keep:
-#     print(i)
