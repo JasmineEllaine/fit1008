@@ -90,7 +90,11 @@ def printText(l, j):
         print(" ".join(l[i:j[i]]))
         i = j[i]
     
-sentence = "you can use dynamic programming to justify text and I learned that in FIT1008".split()
-minCost, textList = justify(sentence, 15)
-print(minCost)
-printText(sentence, textList)
+# sentence = "you can use dynamic programming to justify text and I learned that in FIT1008".split()
+# minCost, textList = justify(sentence, 15)
+# print(minCost)
+# printText(sentence, textList)
+
+par = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.".split()
+minCost, textList = justify(par, 80)
+printText(par, textList)
