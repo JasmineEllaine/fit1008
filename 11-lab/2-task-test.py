@@ -1,3 +1,7 @@
+""" Task 2
+    
+    Test function for task 2
+"""
 from task2 import hash_table
 from time import time
 

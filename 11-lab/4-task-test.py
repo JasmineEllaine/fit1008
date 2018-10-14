@@ -1,3 +1,7 @@
+""" Task 4
+    
+    Test function for task 4
+"""
 from task4 import hash_table
 
 def test_hash_value():
