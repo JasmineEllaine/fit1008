@@ -1,5 +1,4 @@
-from task2 import hash_table
-from time import time
+from task4 import hash_table
 
 def test_hash_value():
     # initialise hash table
@@ -43,17 +42,17 @@ def test_set_item():
     test_hash_2["Captain"] = "Holt"
 
     # test cases
-    assert str(test_hash_2.array[4]) == "(Jake,Peralta)",    "Test failed #10: Set item failed!"
-    assert str(test_hash_2.array[0]) == "(Terry,Crews)",     "Test failed #11: Set item failed!"
-    assert str(test_hash_2.array[1]) == "(Amy,Santiago)",    "Test failed #12: Set item failed!"
-    assert str(test_hash_2.array[2]) == "(Rosa,Diaz)",       "Test failed #13: Set item failed!"
-    assert str(test_hash_2.array[3]) == "(Captain,Holt)",    "Test failed #14: Set item failed!"
+    assert str(test_hash_2.array[4][0]) == "(Jake,Peralta)",    "Test failed #10: Set item failed!"
+    assert str(test_hash_2.array[4][1]) == "(Terry,Crews)",     "Test failed #11: Set item failed!"
+    assert str(test_hash_2.array[0][0]) == "(Amy,Santiago)",    "Test failed #12: Set item failed!"
+    assert str(test_hash_2.array[0][1]) == "(Rosa,Diaz)",       "Test failed #13: Set item failed!"
+    assert str(test_hash_2.array[4][2]) == "(Captain,Holt)",    "Test failed #14: Set item failed!"
 
     # checks collisions and avg probe length
     assert test_hash.collisions == 0,           "Test failed #24: no. of collisions should be 0"
     assert test_hash.avg_probe_length == 0,     "Test failed #25: avg probe length should be 0"
-    assert test_hash_2.collisions == 8,         "Test failed #24: no. of collisions should be 8"
-    assert test_hash_2.avg_probe_length == 1.6, "Test failed #25: avg probe length should be 1.6"
+    assert test_hash_2.collisions == 4,         "Test failed #24: no. of collisions should be 8"
+    assert test_hash_2.avg_probe_length == 4/5, "Test failed #25: avg probe length should be 1.6"
 
 def test_get_item():
     # initialise hash table and values

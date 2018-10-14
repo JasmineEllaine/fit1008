@@ -1,5 +1,4 @@
 import linked_list as link
-
 from referential_array import build_array
 
 class kv_pair:
@@ -16,6 +15,7 @@ class hash_table:
         self.array = build_array(table_size)
         self.table_size = table_size
         self.count = 0
+        self.total_items = 0
         self.collisions = 0
         self.avg_probe_length = 0
         self.load = 0
@@ -31,28 +31,35 @@ class hash_table:
         return string
 
     def __setitem__(self, key, value):
-        candidate_place, collisions = self.linear_probe(key)
+        candidate_place, collisions = self.sep_chain(key)
         if self.array[candidate_place] is None:
             self.count += 1
-        self.array[candidate_place]=kv_pair(key,value,collisions)
+            self.array[candidate_place] = link.LinkedList(kv_pair(key,value,collisions))
+        elif key in self:
+            self.array[candidate_place][collisions].value = value
+        else:
+            self.array[candidate_place].append(kv_pair(key,value,collisions))
         self.calc_stats(collisions)
 
     def calc_stats(self, collisions):
         # collisions = [self.array[i].collisions for i in range(self.table_size) if self.array[i] is not None]
         self.collisions += collisions
-        self.avg_probe_length = self.collisions/self.count
+        self.total_items += 1
+        self.avg_probe_length = self.collisions/self.total_items
         self.load = self.count/self.table_size
 
     def __getitem__(self, key):
-        candidate_place, _ = self.linear_probe(key)
+        candidate_place, i = self.sep_chain(key)
         if self.array[candidate_place] is None:
             raise KeyError(str(key)+" not found")
-        return self.array[candidate_place].value
+        return self.array[candidate_place][i].value
 
     def __contains__(self, key):
         for i in range(self.table_size):
-            if self.array[i] is not None and self.array[i].key == key:
-                return True
+            if self.array[i] is not None:
+                for j in range(len(self.array[i])):
+                    if self.array[i][j].key == key:
+                        return True
         return False
 
     def __len__(self):
@@ -65,17 +72,12 @@ class hash_table:
             result = (result * prime_mult + ord(character)) % self.table_size
         return result
 
-    def linear_probe(self, key, sneakykey=None):
-        if not sneakykey is None:
-            hashv = sneakykey
-        else:
-            hashv = self.hash_value(key)  # first try
-        pos = hashv
-        scannedTable = False
-        i = 0
-        while not (self.array[pos] is None or self.array[pos].key == key or scannedTable):
-            pos = (pos +1)%self.table_size
-            i += 1
-            if i == self.table_size + 1:
-                scannedTable = True
-        return pos, i
+    def sep_chain(self, key):
+        pos = self.hash_value(key)
+        collisions = 0
+        if (self.array[pos] is not None):
+            while not (self.array[pos][collisions] is None or self.array[pos][collisions].key == key):
+                collisions += 1
+                if collisions == len(self.array[pos]):
+                    return pos, collisions
+        return pos, collisions
