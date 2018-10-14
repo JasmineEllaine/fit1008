@@ -88,7 +88,7 @@ class hash_table:
         """ Places a key-value pair onto the hash table
         Args:
             key (any): key to be added to the table
-            value (any): valuea associcated with key
+            value (any): value associcated with key
         Returns:
             None
         Raises:
