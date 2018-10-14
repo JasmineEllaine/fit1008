@@ -1,12 +1,29 @@
+""" Task 5
+    
+    Frequency chart generator using hash tables
+"""
 from task3 import hash_table
 from string import punctuation
 import time
-import pickle
+# import pickle
 import csv
 # with open(filename, ‘wb’) as f:
 #     pickle.dump(your_content, f)
 
 def import_text(filename):
+    """ Imports text from a file
+    Args:
+        filename (str): name of the file to be imported
+    Returns:
+        (list): list of all words from file
+    Raises:
+        No exceptions
+    Precondition:
+        None
+    Postcondition:
+        Returns a list of all words in file stripped of punctuation
+            and in lower case
+    """
     text_file = open(filename)
     text_string = ""
     for line in text_file:
@@ -17,6 +34,18 @@ def import_text(filename):
     return text_string.split()
 
 def main():
+    """ Main function to be run 
+    Args:
+        None
+    Returns:
+        None
+    Raises:
+        No exceptions
+    Precondition:
+        None
+    Postcondition:
+        Writes word frequency table onto a csv file
+    """
     words_list = import_text('text.txt')
     word_hash_table = hash_table(399989)
 
