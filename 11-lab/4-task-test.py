@@ -1,4 +1,5 @@
-from task3 import hash_table
+from task2 import hash_table
+from time import time
 
 def test_hash_value():
     # initialise hash table
@@ -32,7 +33,7 @@ def test_set_item():
     assert str(test_hash.array[13]) == "(Jennifer,1)",      "Test failed #9: Set item failed!"
 
     # test linear probing function
-    test_hash_2 = hash_table(6)
+    test_hash_2 = hash_table(5)
 
     # Use [] to place values where linear probing will be used
     test_hash_2["Jake"] = "Peralta"
@@ -42,19 +43,17 @@ def test_set_item():
     test_hash_2["Captain"] = "Holt"
 
     # test cases
-    assert str(test_hash_2.array[7]) == "(Jake,Peralta)",    "Test failed #10: Set item failed!"
-    assert str(test_hash_2.array[2]) == "(Terry,Crews)",     "Test failed #11: Set item failed!"
-    assert str(test_hash_2.array[3]) == "(Amy,Santiago)",    "Test failed #12: Set item failed!"
-    assert str(test_hash_2.array[1]) == "(Rosa,Diaz)",       "Test failed #13: Set item failed!"
-    assert str(test_hash_2.array[0]) == "(Captain,Holt)",    "Test failed #14: Set item failed!"
+    assert str(test_hash_2.array[4]) == "(Jake,Peralta)",    "Test failed #10: Set item failed!"
+    assert str(test_hash_2.array[0]) == "(Terry,Crews)",     "Test failed #11: Set item failed!"
+    assert str(test_hash_2.array[1]) == "(Amy,Santiago)",    "Test failed #12: Set item failed!"
+    assert str(test_hash_2.array[2]) == "(Rosa,Diaz)",       "Test failed #13: Set item failed!"
+    assert str(test_hash_2.array[3]) == "(Captain,Holt)",    "Test failed #14: Set item failed!"
 
     # checks collisions and avg probe length
     assert test_hash.collisions == 0,           "Test failed #24: no. of collisions should be 0"
     assert test_hash.avg_probe_length == 0,     "Test failed #25: avg probe length should be 0"
-    assert test_hash.load == 3/101 ,            "Test failed #26: incorrect load"
-    assert test_hash_2.collisions == 0,         "Test failed #27: no. of collisions should be 8"
-    assert test_hash_2.avg_probe_length == 0,   "Test failed #28: avg probe length should be 1.6"
-    assert test_hash_2.load == 5/8,               "Test failed #29: incorrect load"
+    assert test_hash_2.collisions == 8,         "Test failed #24: no. of collisions should be 8"
+    assert test_hash_2.avg_probe_length == 1.6, "Test failed #25: avg probe length should be 1.6"
 
 def test_get_item():
     # initialise hash table and values
@@ -86,7 +85,7 @@ def test_get_item():
 
 def test_contains():
     # initialise hash table and values
-    test_hash = hash_table(6)
+    test_hash = hash_table(5)
     test_hash["Jake"] = "Peralta"
     test_hash["Amy"] = "Santiago"
     test_hash["Terry"] = "Crews"
@@ -100,7 +99,7 @@ def test_contains():
 
 def test_updateValues():
     # initialise hash table and values
-    test_hash = hash_table(6)
+    test_hash = hash_table(5)
     test_hash["Jake"] = "Peralta"
     test_hash["Terry"] = "Crews"
     test_hash["Amy"] = "Santiago"
