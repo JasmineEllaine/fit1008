@@ -63,7 +63,7 @@ class hash_table:
         return False
 
     def __len__(self):
-        return self.count
+        return self.total_items
 
     def hash_value(self, key):
         prime_mult = 101
