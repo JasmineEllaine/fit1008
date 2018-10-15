@@ -1,0 +1,34 @@
+Task 2
+Write up a paragraph comparing the number of collisions, probe length and running time found when
+loading each dictionary against the best combination found using the Linear Probing hash table.
+
+Linear probing forms Primary Clustering which once formed, the bigger the cluster gets, the faster it grows.
+This reduces the performance severely. 
+
+Where as Quadratic probing forms Secondary Clustering. It is an attempt to keep clusters from forming.
+The idea is to probe more widely separated cells, instead of those adjacent to the primary hash site. 
+Secondary Clustering is more subtle and not as severe in terms of performance compared to Primary Clustering.
+
+
+
+Task 3
+Write up a paragraph comparing the performance of
+Separate Chaining against linear probing in this case.
+
+In practice, linear probing is typically significantly faster than chaining. This is primarily due to locality
+of reference, since the accesses performed in linear probing tend to be closer in memory than the accesses
+performed in chained hashing.
+
+There are other wins in linear probing. For example, insertions into a linear probing hash table don't require
+any new allocations (unless you're rehashing the table), so in applications like network routers where memory
+is scarce, it's nice to know that once the table is set up, the elements can be placed into it with no risk of a malloc fail.
+
+One weakness of linear probing is that, with a bad choice of hash function, primary clustering can cause the
+performance of the table to degrade significantly. While chained hashing can still suffer from bad hash functions,
+it's less sensitive to elements with nearby hash codes, which don't adversely impact the runtime. Theoretically,
+linear probing only gives expected O(1) lookups if the hash functions are 5-independent or if there's sufficient
+entropy in the keys. There are many ways to address this, since as using the Robin Hood hashing technique or
+hopscotch hashing, both of which have significantly better worst-cases than vanilla linear probing.
+
+The other weakness of linear probing is that its performance significantly degrades as the load factor approaches 1.
+You can address this either by rehashing periodically or by using the Robin Hood hashing technique described above.
